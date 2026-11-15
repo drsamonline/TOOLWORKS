@@ -4,6 +4,17 @@ Every version, what changed, and why. The index is small; this file stays small 
 
 ---
 
+## v1.1.0 — 2026-11-15
+
+A Windows package, and the checks that keep it honest.
+
+| Area | Change |
+|---|---|
+| Added | `windows/` — a launcher, a local server and a guide, so the index runs on Windows with nothing installed |
+| Added | `windows/serve.ps1` — about 80 lines of PowerShell using `System.Net.HttpListener`, which ships with Windows. No Python, no Node, no download |
+| Decision | **no `.exe`.** The page is the program; an exe would be a browser wrapped around it, larger and slower. `README-WINDOWS.md` says so plainly |
+| Checker | 21 checks now, seven of them on the Windows package: both `.cmd` files exist, both use CRLF, the launcher opens `index.html` |
+
 ## v1.0.0 — 2026-11-15
 
 The first version: 969 tools from two catalogues, in one index.

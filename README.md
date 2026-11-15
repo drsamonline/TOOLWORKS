@@ -109,6 +109,17 @@ The best support is to use one of the tools and report what broke.
 
 ---
 
+## Windows
+
+| Way | What it is |
+|---|---|
+| double-click `index.html` | the whole app. One file, no install |
+| [`windows/`](windows/) | a launcher and a PowerShell server, for a phone on your Wi-Fi or an app install |
+
+There is no `.exe`, deliberately: the page is the program, and an exe would be a browser
+wrapped around it, larger and slower. `windows/README-WINDOWS.md` says the same thing at
+more length, including what the server will not do.
+
 ## Checks
 
 `python3 tools_check.py` reads the catalogue and the page and asserts fourteen things:

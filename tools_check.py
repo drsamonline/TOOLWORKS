@@ -57,6 +57,26 @@ def check() -> list[tuple[bool, str]]:
     out.append((not hits, f"the page stores nothing ({hits or 'none'})"))
     out.append(('src="http' not in html, "no asset is loaded from another host"))
 
+    # the Windows package: a .cmd with LF endings is a real failure mode on Windows,
+    # and a launcher that points at nothing is worse than no launcher
+    win = os.path.join(ROOT, "windows")
+    if os.path.isdir(win):
+        for name in ("Toolworks.cmd", "Toolworks-Serve.cmd"):
+            f = os.path.join(win, name)
+            out.append((os.path.exists(f), f"windows/{name} exists"))
+            if os.path.exists(f):
+                raw = open(f, "rb").read()
+                out.append((b"\r\n" in raw and raw.count(b"\n") == raw.count(b"\r\n"),
+                            f"windows/{name} uses CRLF line endings"))
+        out.append((os.path.exists(os.path.join(win, "serve.ps1")),
+                    "windows/serve.ps1 exists"))
+        out.append((os.path.exists(os.path.join(win, "README-WINDOWS.md")),
+                    "windows/README-WINDOWS.md exists"))
+        launcher = os.path.join(win, "Toolworks.cmd")
+        if os.path.exists(launcher):
+            text = open(launcher, encoding="utf-8", errors="replace").read()
+            out.append(("index.html" in text, "the launcher opens index.html"))
+
     # the documents the estate's other repos all carry
     missing = [d for d in DOCS if not os.path.exists(os.path.join(ROOT, d))]
     out.append((not missing, f"every document is present ({missing or 'all'})"))
