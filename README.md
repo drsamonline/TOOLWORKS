@@ -109,6 +109,25 @@ The best support is to use one of the tools and report what broke.
 
 ---
 
+## Checks
+
+`python3 tools_check.py` reads the catalogue and the page and asserts fourteen things:
+the count matches the list, the page lists every tool and nothing else, every id is unique,
+every tool has a group, and — the ones that keep the privacy policy honest — the page has
+**no network code and no storage**. CI runs it on every push, with no dependencies installed.
+
+## Documents
+
+| File | What it answers |
+|---|---|
+| [SOURCES.md](SOURCES.md) | where every tool came from, and what the merge changed |
+| [CHANGELOG.md](CHANGELOG.md) | every version, and the decisions behind it |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | what is welcome here, and what is not |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | the short version: be decent |
+| [SECURITY.md](SECURITY.md) | how to report a problem privately, and what this repo cannot do to you |
+| [PRIVACY.md](PRIVACY.md) | it collects nothing, and here is the proof |
+| [LICENSE](LICENSE) | PolyForm Noncommercial 1.0.0 |
+
 ## Licence
 
 [PolyForm Noncommercial 1.0.0](LICENSE), the same licence as both source projects.

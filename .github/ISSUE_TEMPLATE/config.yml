@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: A tool is broken
+    url: https://github.com/drsamonline/TTB/issues
+    about: This repository is an index. A tool that does not work is a bug in TTB or All4ONE.
+  - name: Security
+    url: https://github.com/drsamonline/TOOLWORKS/security/advisories/new
+    about: Report privately, not in a public issue.
