@@ -4,6 +4,17 @@ Every version, what changed, and why. The index is small; this file stays small 
 
 ---
 
+## v1.1.1 — 2026-11-15
+
+The PowerShell server is gone. The launcher stays.
+
+| Area | Change |
+|---|---|
+| **Removed** | `windows/serve.ps1` and `windows/Toolworks-Serve.cmd`. The server was 80 lines of PowerShell that had **never been executed on Windows** — there was no Windows or PowerShell in the build environment. Shipping unrun code to serve one file is not a risk worth taking |
+| Kept | `windows/Toolworks.cmd`, one line: `start "" "index.html"`. That is the whole Windows story |
+| Replaced by | nothing needed. A Windows user who wants a server has `python -m http.server`; a phone can take the file itself, or the hosted copy |
+| Checker | 20 checks. Two new ones assert the absence: no `serve.ps1` and no `.exe`, because a stray one would contradict the README and the release notes at once |
+
 ## v1.1.0 — 2026-11-15
 
 A Windows package, and the checks that keep it honest.

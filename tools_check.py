@@ -61,17 +61,21 @@ def check() -> list[tuple[bool, str]]:
     # and a launcher that points at nothing is worse than no launcher
     win = os.path.join(ROOT, "windows")
     if os.path.isdir(win):
-        for name in ("Toolworks.cmd", "Toolworks-Serve.cmd"):
+        for name in ("Toolworks.cmd",):
             f = os.path.join(win, name)
             out.append((os.path.exists(f), f"windows/{name} exists"))
             if os.path.exists(f):
                 raw = open(f, "rb").read()
                 out.append((b"\r\n" in raw and raw.count(b"\n") == raw.count(b"\r\n"),
                             f"windows/{name} uses CRLF line endings"))
-        out.append((os.path.exists(os.path.join(win, "serve.ps1")),
-                    "windows/serve.ps1 exists"))
         out.append((os.path.exists(os.path.join(win, "README-WINDOWS.md")),
                     "windows/README-WINDOWS.md exists"))
+        # there is no server and no .exe, by decision. A stray one would contradict the
+        # README and the release notes at once, so its absence is checked.
+        out.append((not os.path.exists(os.path.join(win, "serve.ps1")),
+                    "no PowerShell server is shipped"))
+        out.append((not any(f.endswith(".exe") for f in os.listdir(win)),
+                    "no .exe is shipped"))
         launcher = os.path.join(win, "Toolworks.cmd")
         if os.path.exists(launcher):
             text = open(launcher, encoding="utf-8", errors="replace").read()
